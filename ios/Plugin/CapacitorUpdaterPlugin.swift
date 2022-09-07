@@ -241,10 +241,10 @@ public class CapacitorUpdaterPlugin: CAPPlugin {
         call.resolve()
     }
     
-    @objc func setDelay(_ call: CAPPluginCall) {
-        guard let kind = call.getString("kind") else {
-            print("\(self.implementation.TAG) setDelay called without kind")
-            call.reject("setDelay called without kind")
+    @objc func setDelayCondition(_ call: CAPPluginCall) {
+        guard let conditions = call.getArray("delayConditions") else {
+            print("\(self.implementation.TAG) setDelayCondition called without delayConditions")
+            call.reject("setDelay called without delayConditions")
             return
         }
         let val = call.getString("value") ?? ""

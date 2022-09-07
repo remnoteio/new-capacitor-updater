@@ -12,7 +12,7 @@ CAP_PLUGIN(CapacitorUpdaterPlugin, "CapacitorUpdater",
            CAP_PLUGIN_METHOD(current, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(reload, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(notifyAppReady, CAPPluginReturnPromise);
-           CAP_PLUGIN_METHOD(setDelay, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(setDelayCondition, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(cancelDelay, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(getLatest, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(getDeviceId, CAPPluginReturnPromise);

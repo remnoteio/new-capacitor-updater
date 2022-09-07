@@ -97,6 +97,11 @@ export interface updateAvailableEvent {
   bundle: BundleInfo;
 }
 
+export interface DelayCondition {
+  kind: DelayUntilNext,
+  value?: string
+}
+
 export interface DownloadEvent {
   /**
    * Current status of download, between 0 and 100.
@@ -256,7 +261,7 @@ export interface CapacitorUpdaterPlugin {
   reload(): Promise<void>;
 
   /**
-   * Set delay to skip updates in the next time the app goes into the background
+   * Set DelayCondition, skip updates until one of the condition is met
    *
    * @returns {Promise<void>} an Promise resolved directly
    * @param kind is the kind of delay to set
@@ -264,16 +269,16 @@ export interface CapacitorUpdaterPlugin {
    * @throws An error if the something went wrong
    * @since 4.0.0
    */
-  setDelay(options: {kind: DelayUntilNext, value?: string}): Promise<void>;
+  setDelayCondition(options: { delayConditions: DelayCondition[]}): Promise<void>;
 
   /**
-   * Cancel delay to updates as usual
+   * Cancel DelayCondition to updates as usual
    *
    * @returns {Promise<void>} an Promise resolved directly
    * @throws An error if the something went wrong
    * @since 4.0.0
    */
-  cancelDelay(): Promise<void>;
+  cancelDelayCondition(): Promise<void>;
 
   /**
    * Get Latest version available from update Url
