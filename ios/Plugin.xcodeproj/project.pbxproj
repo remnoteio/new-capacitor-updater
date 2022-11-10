@@ -18,6 +18,8 @@
 		50E1A94820377CB70090CE1A /* CapacitorUpdaterPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1A94720377CB70090CE1A /* CapacitorUpdaterPlugin.swift */; };
 		863289042823450E0057FC90 /* BundleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863289032823450E0057FC90 /* BundleInfo.swift */; };
 		863289062823453C0057FC90 /* BundleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863289052823453C0057FC90 /* BundleStatus.swift */; };
+		95457A26291CD9DF00D97C01 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95457A25291CD9DF00D97C01 /* Future.swift */; };
+		95457A28291CD9E700D97C01 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95457A27291CD9E700D97C01 /* Promise.swift */; };
 		B3F3EE2328CF27FA00663217 /* DelayCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F3EE2228CF27FA00663217 /* DelayCondition.swift */; };
 		B3F3EE2528CF287200663217 /* DelayUntilNext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F3EE2428CF287200663217 /* DelayUntilNext.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,8 @@
 		863289032823450E0057FC90 /* BundleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleInfo.swift; sourceTree = "<group>"; };
 		863289052823453C0057FC90 /* BundleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleStatus.swift; sourceTree = "<group>"; };
 		91781294A431A2A7CC6EB714 /* Pods-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.release.xcconfig"; sourceTree = "<group>"; };
+		95457A25291CD9DF00D97C01 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		95457A27291CD9E700D97C01 /* Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		96ED1B6440D6672E406C8D19 /* Pods-PluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PluginTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PluginTests/Pods-PluginTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B3F3EE2228CF27FA00663217 /* DelayCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayCondition.swift; sourceTree = "<group>"; };
 		B3F3EE2428CF287200663217 /* DelayUntilNext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayUntilNext.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				50ADFF8C201F53D600D50D53 /* Info.plist */,
 				B3F3EE2228CF27FA00663217 /* DelayCondition.swift */,
 				B3F3EE2428CF287200663217 /* DelayUntilNext.swift */,
+				95457A25291CD9DF00D97C01 /* Future.swift */,
+				95457A27291CD9E700D97C01 /* Promise.swift */,
 			);
 			path = Plugin;
 			sourceTree = "<group>";
@@ -204,7 +210,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 1160;
-				ORGANIZATIONNAME = "Capgo";
+				ORGANIZATIONNAME = Capgo;
 				TargetAttributes = {
 					50ADFF87201F53D600D50D53 = {
 						CreatedOnToolsVersion = 9.2;
@@ -280,13 +286,19 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PluginTests/Pods-PluginTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Capacitor/Capacitor.framework",
 				"${BUILT_PRODUCTS_DIR}/CapacitorCordova/Cordova.framework",
+				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
+				"${BUILT_PRODUCTS_DIR}/Version/Version.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Capacitor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cordova.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Version.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -320,8 +332,10 @@
 			files = (
 				50E1A94820377CB70090CE1A /* CapacitorUpdaterPlugin.swift in Sources */,
 				B3F3EE2328CF27FA00663217 /* DelayCondition.swift in Sources */,
+				95457A26291CD9DF00D97C01 /* Future.swift in Sources */,
 				B3F3EE2528CF287200663217 /* DelayUntilNext.swift in Sources */,
 				863289062823453C0057FC90 /* BundleStatus.swift in Sources */,
+				95457A28291CD9E700D97C01 /* Promise.swift in Sources */,
 				2F98D68224C9AAE500613A4C /* CapacitorUpdater.swift in Sources */,
 				863289042823450E0057FC90 /* BundleInfo.swift in Sources */,
 				50ADFFA82020EE4F00D50D53 /* CapacitorUpdaterPlugin.m in Sources */,
@@ -485,7 +499,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Plugin/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)\n$(FRAMEWORK_SEARCH_PATHS)\n$(FRAMEWORK_SEARCH_PATHS)";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.getcapacitor.Plugin;
@@ -510,7 +524,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Plugin/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.getcapacitor.Plugin;
