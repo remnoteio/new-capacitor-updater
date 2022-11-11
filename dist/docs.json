@@ -1,0 +1,1931 @@
+{
+  "api": {
+    "name": "CapacitorUpdaterPlugin",
+    "slug": "capacitorupdaterplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "notifyAppReady",
+        "signature": "() => Promise<BundleInfo>",
+        "parameters": [],
+        "returns": "Promise<BundleInfo>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise resolved directly"
+          },
+          {
+            "name": "throws",
+            "text": "An error if something went wrong"
+          }
+        ],
+        "docs": "Notify Capacitor Updater that the current bundle is working (a rollback will occur of this method is not called on every app launch)",
+        "complexTypes": [
+          "BundleInfo"
+        ],
+        "slug": "notifyappready"
+      },
+      {
+        "name": "download",
+        "signature": "(options: { url: string; version: string; }) => Promise<BundleInfo>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ url: string; version: string; }"
+          }
+        ],
+        "returns": "Promise<BundleInfo>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "The {@link BundleInfo} for the specified bundle."
+          },
+          {
+            "name": "param",
+            "text": "url The URL of the bundle zip file (e.g: dist.zip) to be downloaded. (This can be any URL. E.g: Amazon S3, a github tag, any other place you've hosted your bundle.)"
+          },
+          {
+            "name": "param",
+            "text": "version set the version code/name of this bundle/version"
+          },
+          {
+            "name": "example",
+            "text": "https://example.com/versions/{version}/dist.zip"
+          }
+        ],
+        "docs": "Download a new bundle from the provided URL, it should be a zip file, with files inside or with a unique id inside with all your files",
+        "complexTypes": [
+          "BundleInfo"
+        ],
+        "slug": "download"
+      },
+      {
+        "name": "next",
+        "signature": "(options: { id: string; }) => Promise<BundleInfo>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ id: string; }"
+          }
+        ],
+        "returns": "Promise<BundleInfo>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "The {@link BundleInfo} for the specified bundle id."
+          },
+          {
+            "name": "param",
+            "text": "id The bundle id to set as current, next time the app is reloaded. See {@link BundleInfo.id}"
+          },
+          {
+            "name": "throws",
+            "text": "An error if there are is no index.html file inside the bundle folder."
+          }
+        ],
+        "docs": "Set the next bundle to be used when the app is reloaded.",
+        "complexTypes": [
+          "BundleInfo"
+        ],
+        "slug": "next"
+      },
+      {
+        "name": "set",
+        "signature": "(options: { id: string; }) => Promise<void>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ id: string; }"
+          }
+        ],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "id The bundle id to set as current. See {@link BundleInfo.id}"
+          },
+          {
+            "name": "returns",
+            "text": "An empty promise."
+          },
+          {
+            "name": "throws",
+            "text": "An error if there are is no index.html file inside the bundle folder."
+          }
+        ],
+        "docs": "Set the current bundle and immediately reloads the app.",
+        "complexTypes": [],
+        "slug": "set"
+      },
+      {
+        "name": "delete",
+        "signature": "(options: { id: string; }) => Promise<void>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ id: string; }"
+          }
+        ],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an empty Promise when the bundle is deleted"
+          },
+          {
+            "name": "param",
+            "text": "id The bundle id to delete (note, this is the bundle id, NOT the version name)"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          }
+        ],
+        "docs": "Delete bundle in storage",
+        "complexTypes": [],
+        "slug": "delete"
+      },
+      {
+        "name": "list",
+        "signature": "() => Promise<{ bundles: BundleInfo[]; }>",
+        "parameters": [],
+        "returns": "Promise<{ bundles: BundleInfo[]; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise witht the bundles list"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          }
+        ],
+        "docs": "Get all available bundles",
+        "complexTypes": [
+          "BundleInfo"
+        ],
+        "slug": "list"
+      },
+      {
+        "name": "reset",
+        "signature": "(options?: { toLastSuccessful?: boolean | undefined; } | undefined) => Promise<void>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ toLastSuccessful?: boolean | undefined; } | undefined"
+          }
+        ],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an empty Promise"
+          },
+          {
+            "name": "param",
+            "text": "toLastSuccessful [false] if yes it reset to to the last successfully loaded bundle instead of `builtin`"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          }
+        ],
+        "docs": "Set the `builtin` bundle (the one sent to Apple store / Google play store ) as current bundle",
+        "complexTypes": [],
+        "slug": "reset"
+      },
+      {
+        "name": "current",
+        "signature": "() => Promise<{ bundle: BundleInfo; native: string; }>",
+        "parameters": [],
+        "returns": "Promise<{ bundle: BundleInfo; native: string; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise with the current bundle info"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          }
+        ],
+        "docs": "Get the current bundle, if none are set it returns `builtin`, currentNative is the original bundle installed on the device",
+        "complexTypes": [
+          "BundleInfo"
+        ],
+        "slug": "current"
+      },
+      {
+        "name": "reload",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise resolved when the view is reloaded"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          }
+        ],
+        "docs": "Reload the view",
+        "complexTypes": [],
+        "slug": "reload"
+      },
+      {
+        "name": "setMultiDelay",
+        "signature": "(options: { delayConditions: DelayCondition[]; }) => Promise<void>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "are the {@link DelayCondition} list to set",
+            "type": "{ delayConditions: DelayCondition[]; }"
+          }
+        ],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise resolved directly"
+          },
+          {
+            "name": "param",
+            "text": "options are the {@link DelayCondition} list to set"
+          },
+          {
+            "name": "example",
+            "text": "setMultiDelay({ delayConditions: [{ kind: 'kill' }, { kind: 'background', value: '300000' }] })\n// installs the update after the user kills the app or after a background of 300000 ms (5 minutes)"
+          },
+          {
+            "name": "example",
+            "text": "setMultiDelay({ delayConditions: [{ kind: 'date', value: '2022-09-14T06:14:11.920Z' }] })\n// installs the update after the specific iso8601 date is expired"
+          },
+          {
+            "name": "example",
+            "text": "setMultiDelay({ delayConditions: [{ kind: 'background' }] })\n// installs the update after the the first background (default behaviour without setting delay)"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          },
+          {
+            "name": "since",
+            "text": "4.3.0"
+          }
+        ],
+        "docs": "Set DelayCondition, skip updates until one of the conditions is met",
+        "complexTypes": [
+          "DelayCondition"
+        ],
+        "slug": "setmultidelay"
+      },
+      {
+        "name": "setDelay",
+        "signature": "(options: DelayCondition) => Promise<void>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "is the {@link DelayCondition} to set",
+            "type": "DelayCondition"
+          }
+        ],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "deprecated",
+            "text": "use setMultiDelay instead passing a single value in array"
+          },
+          {
+            "name": "returns",
+            "text": "an Promise resolved directly"
+          },
+          {
+            "name": "param",
+            "text": "options is the {@link DelayCondition} to set"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          },
+          {
+            "name": "since",
+            "text": "4.0.0"
+          }
+        ],
+        "docs": "Set DelayCondition, skip updates until the condition is met",
+        "complexTypes": [
+          "DelayCondition"
+        ],
+        "slug": "setdelay"
+      },
+      {
+        "name": "cancelDelay",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise resolved directly"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          },
+          {
+            "name": "since",
+            "text": "4.0.0"
+          }
+        ],
+        "docs": "Cancel delay to updates as usual",
+        "complexTypes": [],
+        "slug": "canceldelay"
+      },
+      {
+        "name": "getLatest",
+        "signature": "() => Promise<latestVersion>",
+        "parameters": [],
+        "returns": "Promise<latestVersion>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise resolved when url is loaded"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          },
+          {
+            "name": "since",
+            "text": "4.0.0"
+          }
+        ],
+        "docs": "Get Latest bundle available from update Url",
+        "complexTypes": [
+          "latestVersion"
+        ],
+        "slug": "getlatest"
+      },
+      {
+        "name": "setChannel",
+        "signature": "(options: SetChannelOptions) => Promise<channelRes>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "is the {@link SetChannelOptions} channel to set",
+            "type": "SetChannelOptions"
+          }
+        ],
+        "returns": "Promise<channelRes>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise resolved when channel is set"
+          },
+          {
+            "name": "param",
+            "text": "options is the {@link SetChannelOptions} channel to set"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          },
+          {
+            "name": "since",
+            "text": "4.7.0"
+          }
+        ],
+        "docs": "Set Channel for this device",
+        "complexTypes": [
+          "channelRes",
+          "SetChannelOptions"
+        ],
+        "slug": "setchannel"
+      },
+      {
+        "name": "getChannel",
+        "signature": "() => Promise<getChannelRes>",
+        "parameters": [],
+        "returns": "Promise<getChannelRes>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise resolved with channel info"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          },
+          {
+            "name": "since",
+            "text": "4.8.0"
+          }
+        ],
+        "docs": "get Channel for this device",
+        "complexTypes": [
+          "getChannelRes"
+        ],
+        "slug": "getchannel"
+      },
+      {
+        "name": "setCustomId",
+        "signature": "(options: SetCustomIdOptions) => Promise<void>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "is the {@link SetCustomIdOptions} customId to set",
+            "type": "SetCustomIdOptions"
+          }
+        ],
+        "returns": "Promise<void>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise resolved instantly"
+          },
+          {
+            "name": "param",
+            "text": "options is the {@link SetCustomIdOptions} customId to set"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          },
+          {
+            "name": "since",
+            "text": "4.9.0"
+          }
+        ],
+        "docs": "Set Channel for this device",
+        "complexTypes": [
+          "SetCustomIdOptions"
+        ],
+        "slug": "setcustomid"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'download', listenerFunc: DownloadChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'download'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "DownloadChangeListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [
+          {
+            "name": "since",
+            "text": "2.0.11"
+          }
+        ],
+        "docs": "Listen for download event in the App, let you know when the download is started, loading and finished",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "DownloadChangeListener"
+        ],
+        "slug": "addlistenerdownload"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'noNeedUpdate', listenerFunc: NoNeedListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'noNeedUpdate'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "NoNeedListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [
+          {
+            "name": "since",
+            "text": "4.0.0"
+          }
+        ],
+        "docs": "Listen for no need to update event, usefull when you want force check every time the app is launched",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "NoNeedListener"
+        ],
+        "slug": "addlistenernoneedupdate"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'updateAvailable', listenerFunc: UpdateAvailabledListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'updateAvailable'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "UpdateAvailabledListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [
+          {
+            "name": "since",
+            "text": "4.0.0"
+          }
+        ],
+        "docs": "Listen for availbale update event, usefull when you want to force check every time the app is launched",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "UpdateAvailabledListener"
+        ],
+        "slug": "addlistenerupdateavailable"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'downloadComplete', listenerFunc: DownloadCompleteListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'downloadComplete'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "DownloadCompleteListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [
+          {
+            "name": "since",
+            "text": "4.0.0"
+          }
+        ],
+        "docs": "Listen for download event in the App, let you know when the download is started, loading and finished",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "DownloadCompleteListener"
+        ],
+        "slug": "addlistenerdownloadcomplete"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'majorAvailable', listenerFunc: MajorAvailableListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'majorAvailable'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "MajorAvailableListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [
+          {
+            "name": "since",
+            "text": "2.3.0"
+          }
+        ],
+        "docs": "Listen for Major update event in the App, let you know when major update is blocked by setting disableAutoUpdateBreaking",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "MajorAvailableListener"
+        ],
+        "slug": "addlistenermajoravailable"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'updateFailed', listenerFunc: UpdateFailedListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'updateFailed'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "UpdateFailedListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [
+          {
+            "name": "since",
+            "text": "2.3.0"
+          }
+        ],
+        "docs": "Listen for update fail event in the App, let you know when update has fail to install at next app start",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "UpdateFailedListener"
+        ],
+        "slug": "addlistenerupdatefailed"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'downloadFailed', listenerFunc: DownloadFailedListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'downloadFailed'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "DownloadFailedListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [
+          {
+            "name": "since",
+            "text": "4.0.0"
+          }
+        ],
+        "docs": "Listen for download fail event in the App, let you know when download has fail finished",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "DownloadFailedListener"
+        ],
+        "slug": "addlistenerdownloadfailed"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'appReloaded', listenerFunc: AppReloadedListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'appReloaded'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "AppReloadedListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [
+          {
+            "name": "since",
+            "text": "4.3.0"
+          }
+        ],
+        "docs": "Listen for download fail event in the App, let you know when download has fail finished",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "AppReloadedListener"
+        ],
+        "slug": "addlistenerappreloaded"
+      },
+      {
+        "name": "getDeviceId",
+        "signature": "() => Promise<{ deviceId: string; }>",
+        "parameters": [],
+        "returns": "Promise<{ deviceId: string; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise with id for this device"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          }
+        ],
+        "docs": "Get unique ID used to identify device (sent to auto update server)",
+        "complexTypes": [],
+        "slug": "getdeviceid"
+      },
+      {
+        "name": "getPluginVersion",
+        "signature": "() => Promise<{ version: string; }>",
+        "parameters": [],
+        "returns": "Promise<{ version: string; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "an Promise with version for this device"
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          }
+        ],
+        "docs": "Get the native Capacitor Updater plugin version (sent to auto update server)",
+        "complexTypes": [],
+        "slug": "getpluginversion"
+      },
+      {
+        "name": "isAutoUpdateEnabled",
+        "signature": "() => Promise<{ enabled: boolean; }>",
+        "parameters": [],
+        "returns": "Promise<{ enabled: boolean; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "The status for auto update."
+          },
+          {
+            "name": "throws",
+            "text": "An error if the something went wrong"
+          }
+        ],
+        "docs": "Get the state of auto update config. This will return `false` in manual mode.",
+        "complexTypes": [],
+        "slug": "isautoupdateenabled"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: string, listenerFunc: (...args: any[]) => any) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "string"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(...args: any[]) => any"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistenerstring"
+      },
+      {
+        "name": "removeAllListeners",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "removealllisteners"
+      }
+    ],
+    "properties": [],
+    "importObject": [
+      "PluginListenerHandle",
+      "\"@capacitor/cli\"",
+      "noNeedEvent",
+      "updateAvailableEvent",
+      "channelRes",
+      "getChannelRes",
+      "DownloadEvent",
+      "MajorAvailableEvent",
+      "DownloadFailedEvent",
+      "DownloadCompleteEvent",
+      "UpdateFailedEvent",
+      "latestVersion",
+      "BundleInfo",
+      "SetChannelOptions",
+      "SetCustomIdOptions",
+      "DelayCondition",
+      "BundleStatus",
+      "DelayUntilNext",
+      "DownloadChangeListener",
+      "NoNeedListener",
+      "UpdateAvailabledListener",
+      "DownloadFailedListener",
+      "DownloadCompleteListener",
+      "MajorAvailableListener",
+      "UpdateFailedListener",
+      "AppReloadedListener"
+    ]
+  },
+  "interfaces": [
+    {
+      "name": "BundleInfo",
+      "slug": "bundleinfo",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "id",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "version",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "downloaded",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "checksum",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "BundleStatus"
+          ],
+          "type": "BundleStatus"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "DelayCondition",
+      "slug": "delaycondition",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "kind",
+          "tags": [
+            {
+              "text": "value is useless for",
+              "name": "param"
+            },
+            {
+              "text": "kind \"kill\", optional for \"background\" (default value: \"0\") and required for \"nativeVersion\" and \"date\"",
+              "name": "param"
+            }
+          ],
+          "docs": "Set up delay conditions in setMultiDelay",
+          "complexTypes": [
+            "DelayUntilNext"
+          ],
+          "type": "DelayUntilNext"
+        },
+        {
+          "name": "value",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "latestVersion",
+      "slug": "latestversion",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "version",
+          "tags": [
+            {
+              "text": "4.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Res of getLatest method",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "major",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "message",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "old",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "url",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "channelRes",
+      "slug": "channelres",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "status",
+          "tags": [
+            {
+              "text": "4.7.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Current status of set channel",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "error",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "any"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "SetChannelOptions",
+      "slug": "setchanneloptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "channel",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "getChannelRes",
+      "slug": "getchannelres",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "channel",
+          "tags": [
+            {
+              "text": "4.8.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Current status of get channel",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "error",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "any"
+        },
+        {
+          "name": "status",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "allowSet",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "SetCustomIdOptions",
+      "slug": "setcustomidoptions",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "customId",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => Promise<void>"
+        }
+      ],
+      "importObject": [
+        "PluginRegistry",
+        "CapacitorException",
+        "CapacitorGlobal",
+        "RegisterPlugin",
+        "PluginImplementations",
+        "Plugin",
+        "PermissionState",
+        "PluginResultData",
+        "PluginResultError",
+        "PluginCallback"
+      ]
+    },
+    {
+      "name": "DownloadEvent",
+      "slug": "downloadevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "percent",
+          "tags": [
+            {
+              "text": "4.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Current status of download, between 0 and 100.",
+          "complexTypes": [],
+          "type": "number"
+        },
+        {
+          "name": "bundle",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [
+            "BundleInfo"
+          ],
+          "type": "BundleInfo"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "noNeedEvent",
+      "slug": "noneedevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "bundle",
+          "tags": [
+            {
+              "text": "4.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Current status of download, between 0 and 100.",
+          "complexTypes": [
+            "BundleInfo"
+          ],
+          "type": "BundleInfo"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "updateAvailableEvent",
+      "slug": "updateavailableevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "bundle",
+          "tags": [
+            {
+              "text": "4.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Current status of download, between 0 and 100.",
+          "complexTypes": [
+            "BundleInfo"
+          ],
+          "type": "BundleInfo"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "DownloadCompleteEvent",
+      "slug": "downloadcompleteevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "bundle",
+          "tags": [
+            {
+              "text": "4.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Emit when a new update is available.",
+          "complexTypes": [
+            "BundleInfo"
+          ],
+          "type": "BundleInfo"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "MajorAvailableEvent",
+      "slug": "majoravailableevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "version",
+          "tags": [
+            {
+              "text": "4.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Emit when a new major bundle is available.",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "UpdateFailedEvent",
+      "slug": "updatefailedevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "bundle",
+          "tags": [
+            {
+              "text": "4.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Emit when a update failed to install.",
+          "complexTypes": [
+            "BundleInfo"
+          ],
+          "type": "BundleInfo"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadFailedEvent",
+        "DownloadCompleteEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    },
+    {
+      "name": "DownloadFailedEvent",
+      "slug": "downloadfailedevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "version",
+          "tags": [
+            {
+              "text": "4.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Emit when a download fail.",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ],
+      "importObject": [
+        "PluginListenerHandle",
+        "\"@capacitor/cli\"",
+        "noNeedEvent",
+        "updateAvailableEvent",
+        "channelRes",
+        "getChannelRes",
+        "DownloadEvent",
+        "MajorAvailableEvent",
+        "DownloadCompleteEvent",
+        "UpdateFailedEvent",
+        "latestVersion",
+        "BundleInfo",
+        "SetChannelOptions",
+        "SetCustomIdOptions",
+        "DelayCondition",
+        "BundleStatus",
+        "DelayUntilNext",
+        "DownloadChangeListener",
+        "NoNeedListener",
+        "UpdateAvailabledListener",
+        "DownloadFailedListener",
+        "DownloadCompleteListener",
+        "MajorAvailableListener",
+        "UpdateFailedListener",
+        "AppReloadedListener",
+        "CapacitorUpdaterPlugin"
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [
+    {
+      "name": "BundleStatus",
+      "slug": "bundlestatus",
+      "docs": "",
+      "types": [
+        {
+          "text": "'success'",
+          "complexTypes": []
+        },
+        {
+          "text": "'error'",
+          "complexTypes": []
+        },
+        {
+          "text": "'pending'",
+          "complexTypes": []
+        },
+        {
+          "text": "'downloading'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "DelayUntilNext",
+      "slug": "delayuntilnext",
+      "docs": "",
+      "types": [
+        {
+          "text": "'background'",
+          "complexTypes": []
+        },
+        {
+          "text": "'kill'",
+          "complexTypes": []
+        },
+        {
+          "text": "'nativeVersion'",
+          "complexTypes": []
+        },
+        {
+          "text": "'date'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "DownloadChangeListener",
+      "slug": "downloadchangelistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: DownloadEvent): void",
+          "complexTypes": [
+            "DownloadEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NoNeedListener",
+      "slug": "noneedlistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: noNeedEvent): void",
+          "complexTypes": [
+            "noNeedEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "UpdateAvailabledListener",
+      "slug": "updateavailabledlistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: updateAvailableEvent): void",
+          "complexTypes": [
+            "updateAvailableEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DownloadCompleteListener",
+      "slug": "downloadcompletelistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: DownloadCompleteEvent): void",
+          "complexTypes": [
+            "DownloadCompleteEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MajorAvailableListener",
+      "slug": "majoravailablelistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: MajorAvailableEvent): void",
+          "complexTypes": [
+            "MajorAvailableEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "UpdateFailedListener",
+      "slug": "updatefailedlistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: UpdateFailedEvent): void",
+          "complexTypes": [
+            "UpdateFailedEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DownloadFailedListener",
+      "slug": "downloadfailedlistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: DownloadFailedEvent): void",
+          "complexTypes": [
+            "DownloadFailedEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AppReloadedListener",
+      "slug": "appreloadedlistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: void): void",
+          "complexTypes": []
+        }
+      ]
+    }
+  ],
+  "pluginConfigs": [
+    {
+      "name": "CapacitorUpdater",
+      "slug": "capacitorupdater",
+      "properties": [
+        {
+          "name": "appReadyTimeout",
+          "tags": [
+            {
+              "text": "10000 // (10 seconds)",
+              "name": "default"
+            },
+            {
+              "text": "1000 // (1 second)",
+              "name": "example"
+            }
+          ],
+          "docs": "Configure the number of milliseconds the native plugin should wait before considering an update 'failed'.\n\nOnly available for Android and iOS.",
+          "complexTypes": [],
+          "type": "number | undefined"
+        },
+        {
+          "name": "autoDeleteFailed",
+          "tags": [
+            {
+              "text": "true",
+              "name": "default"
+            },
+            {
+              "text": "false",
+              "name": "example"
+            }
+          ],
+          "docs": "Configure whether the plugin should use automatically delete failed bundles.\n\nOnly available for Android and iOS.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "autoDeletePrevious",
+          "tags": [
+            {
+              "text": "true",
+              "name": "default"
+            },
+            {
+              "text": "false",
+              "name": "example"
+            }
+          ],
+          "docs": "Configure whether the plugin should use automatically delete previous bundles after a successful update.\n\nOnly available for Android and iOS.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "autoUpdate",
+          "tags": [
+            {
+              "text": "true",
+              "name": "default"
+            },
+            {
+              "text": "false",
+              "name": "example"
+            }
+          ],
+          "docs": "Configure whether the plugin should use Auto Update via an update server.\n\nOnly available for Android and iOS.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "resetWhenUpdate",
+          "tags": [
+            {
+              "text": "true",
+              "name": "default"
+            },
+            {
+              "text": "false",
+              "name": "example"
+            }
+          ],
+          "docs": "Automatically delete previous downloaded bundles when a newer native app bundle is installed to the device.\n\nOnly available for Android and iOS.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "updateUrl",
+          "tags": [
+            {
+              "text": "https://api.capgo.app/auto_update",
+              "name": "default"
+            },
+            {
+              "text": "https://example.com/api/auto_update",
+              "name": "example"
+            }
+          ],
+          "docs": "Configure the URL / endpoint to which update checks are sent.\n\nOnly available for Android and iOS.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "statsUrl",
+          "tags": [
+            {
+              "text": "https://api.capgo.app/stats",
+              "name": "default"
+            },
+            {
+              "text": "https://example.com/api/stats",
+              "name": "example"
+            }
+          ],
+          "docs": "Configure the URL / endpoint to which update statistics are sent.\n\nOnly available for Android and iOS. Set to \"\" to disable stats reporting.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "allowEmulatorProd",
+          "tags": [
+            {
+              "text": "true",
+              "name": "default"
+            },
+            {
+              "text": "false",
+              "name": "example"
+            }
+          ],
+          "docs": "Allow the plugin to automatically check for updates on app launch on emulator devices in production app.\n\nThis is useful for CI/CD who send builds to google at each commit.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        }
+      ],
+      "docs": "These configuration values are available:"
+    }
+  ]
+}

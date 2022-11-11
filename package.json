@@ -35,31 +35,35 @@
     "native"
   ],
   "scripts": {
-    "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
+    "verify": "yarn verify:ios && yarn verify:android && yarn verify:web",
     "verify:ios": "cd ios && pod install && xcodebuild -workspace Plugin.xcworkspace -scheme Plugin && cd ..",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
-    "verify:web": "npm run build",
-    "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
-    "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --autocorrect --format",
+    "verify:web": "yarn build",
+    "lint": "yarn eslint && yarn prettier -- --check && yarn swiftlint -- lint",
+    "fmt": "yarn eslint -- --fix && yarn prettier -- --write && yarn swiftlint -- --autocorrect --format",
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
     "docgen": "docgen --api CapacitorUpdaterPlugin --output-readme README.md --output-json dist/docs.json",
-    "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js",
+    "build": "yarn clean && yarn docgen && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "yarn build"
   },
+  "pre-push": [
+    "build"
+  ],
   "devDependencies": {
     "@capacitor/android": "^4.4.0",
-    "@capacitor/core": "^4.4.0",
     "@capacitor/cli": "^4.4.0",
+    "@capacitor/core": "^4.4.0",
     "@capacitor/docgen": "^0.1.1",
     "@capacitor/ios": "^4.4.0",
     "@ionic/eslint-config": "^0.3.0",
     "@ionic/prettier-config": "^2.0.0",
     "@ionic/swiftlint-config": "^1.1.2",
     "eslint": "^7.32.0",
+    "pre-push": "^0.1.4",
     "prettier": "^2.5.1",
     "prettier-plugin-java": "^1.6.1",
     "rimraf": "^3.0.2",
