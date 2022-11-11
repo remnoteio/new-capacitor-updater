@@ -626,7 +626,8 @@ extension CustomError: LocalizedError {
       result = BundleInfo(id: trueId, version: "", status: BundleStatus.ERROR, checksum: "")
     } else {
       
-      let obj = UserDefaults.standard.object(forKey: "\(trueId)\(self.INFO_SUFFIX)") as? BundleInfo
+      let obj = BundleInfo.retrieve(key: "\(trueId)\(self.INFO_SUFFIX)")
+    
       if (obj != nil) {
         result = obj!
       } else {
@@ -663,7 +664,11 @@ extension CustomError: LocalizedError {
     } else {
       let update = bundle!.setId(id: id)
       print("\(self.TAG) Storing info for bundle [\(id)]", update.toString())
-      UserDefaults.standard.set(update, forKey: "\(id)\(self.INFO_SUFFIX)")
+      do {
+        try update.save(key: "\(id)\(self.INFO_SUFFIX)")
+      } catch {
+        print("\(self.TAG) Failed to save bundle [\(id)]", update.toString())
+      }
     }
     UserDefaults.standard.synchronize()
   }
