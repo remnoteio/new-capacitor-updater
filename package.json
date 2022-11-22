@@ -12,7 +12,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "CapgoCapacitorUpdater.podspec"
+    "RemnoteCapacitorUpdater.podspec"
   ],
   "author": "Martin Donadieu",
   "repository": {
